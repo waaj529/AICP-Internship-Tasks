@@ -1,1 +1,130 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    // Constants and arrays as in Task 1
+    const float initial_price = 200.0;
+    string item_code[18];
+    string item_description[18];
+    float item_price[18];
+
+    // Initialize arrays with values as in Task 1
+
+    // Variables for Task 1
+    int count = 0;
+    string case_code, ram_code, main_disk_code;
+    string case_description, ram_description, main_disk_description;
+    float case_price = 0.0, ram_price = 0.0, main_disk_price = 0.0, total_price = 0.0;
+
+    // Variables for Task 2
+    char choice;
+    int n;
+    string new_item_code[18];
+    string new_item_description[18];
+    float new_item_price[18];
+    float new_items_total_price = 0.0;
+    float new_total_price = 0.0;
+
+    // Discount-related variables
+    float discount = 0.0;
+    float money_saved = 0.0;
+    float discounted_price = 0.0;
+
+    cout << "New sale initiated - Default basic set of components costing $200 is added." << endl;
+    cout << "One case, one RAM, and one Main Hard Disk Drive is required to be added." << endl;
+
+    // Display available computer cases as in Task 1
+    // ...
+
+    // Display available RAM options as in Task 1
+    // ...
+
+    // Display available Main Hard Disk Drive options as in Task 1
+    // ...
+
+    // Calculate total price as in Task 1
+    // ...
+
+    // Additional functionality for choosing and adding more items
+    cout << "Do you want to purchase additional items from other categories? (Y/N): ";
+    cin >> choice;
+
+    while (choice != 'Y' && choice != 'N') {
+        cout << "Wrong input. It should be either Y or N only." << endl;
+        cout << "Do you want to purchase additional items from other categories? (Y/N): ";
+        cin >> choice;
+    }
+
+    if (choice == 'Y') {
+        cout << "The following are the additional item codes along with their descriptions and prices:" << endl;
+        // Display additional item codes and descriptions
+        // ...
+
+        cout << "How many additional items do you want to buy? ";
+        cin >> n;
+
+        while (n < 1) {
+            cout << "You cannot buy less than at least 1 additional item(s)." << endl;
+            cout << "How many additional items do you want to buy? ";
+            cin >> n;
+        }
+
+        for (int i = 1; i <= n; i++) {
+            cout << "Enter the additional item code: ";
+            cin >> new_item_code[i];
+
+            while (!(new_item_code[i] == "D1" || new_item_code[i] == "D2" || new_item_code[i] == "E1" ||
+                     new_item_code[i] == "E2" || new_item_code[i] == "E3" || new_item_code[i] == "F1" ||
+                     new_item_code[i] == "F2" || new_item_code[i] == "G1" || new_item_code[i] == "G2")) {
+                cout << "Wrong additional item code. It should be either D1, D2, E1, E2, E3, F1, F2, G1, or G2 only." << endl;
+                cout << "Enter the additional item code: ";
+                cin >> new_item_code[i];
+            }
+        }
+
+        // Calculate total price of the additional items
+        for (int i = 1; i <= n; i++) {
+            for (int j = 9; j <= 17; j++) {
+                if (new_item_code[i] == item_code[j]) {
+                    new_item_description[i] = item_description[j];
+                    new_item_price[i] = item_price[j]; // Update the price of the additional item
+                    new_items_total_price += new_item_price[i];
+                    break;
+                }
+            }
+        }
+
+        new_total_price = total_price + new_items_total_price;
+
+        // Calculate the discount
+        if (n == 1) {
+            discount = 0.05;
+            cout << "You have bought only one additional item. You would be given a 5% discount!" << endl;
+        } else if (n > 1) {
+            discount = 0.1;
+            cout << "You have bought more than one additional item. You would be given a 10% discount!" << endl;
+        }
+
+        // Calculate the money saved and the discounted price
+        money_saved = new_total_price * discount;
+        discounted_price = new_total_price - money_saved;
+
+        cout << "The amount of money saved is: $" << money_saved << endl;
+        cout << "The new price of the computer after discount is: $" << discounted_price << endl;
+
+        cout << "The additional items bought along with their codes, descriptions, and prices are:" << endl;
+        for (int i = 1; i <= n; i++) {
+            cout << new_item_code[i] << ", " << new_item_description[i] << ", $" << new_item_price[i] << endl;
+        }
+
+        cout << "The total price of the computer, items bought previously, and new items is: $" << new_total_price << endl;
+    }
+
+    if (choice == 'N') {
+        cout << "Thank you for shopping." << endl;
+    }
+
+    return 0;
+}
 
