@@ -1,1 +1,179 @@
+Task 1
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+//Task 1
+int main()
+{
+
+
+ int ticket_cost=25;
+
+ string trainUpTimes[]={"09:00","11:00","13:00","15:00"};
+ int trainUpTickets[]={480,480,480,480};
+ int trainUpMoney[]={0,0,0,0};
+
+ string trainDownTimes[]={"10:00","12:00","14:00","16:00"};
+ int trainDownTickets[]={480,480,480,480};
+ int trainDownMoney[]={0,0,0,0};
+
+ cout<<"--------Welcome to Railway Station-----------"<<endl;
+ cout<<"------Train Schedule-------"<<endl;
+
+ for (int i = 0; i < 4; ++i)
+    {
+        cout << "Train " << (i + 1) << " (Up): " << trainUpTimes[i] << " - " << trainUpTickets[i] << " tickets available" << endl;
+        cout << "Train " << (i + 1) << " (Down): " << trainDownTimes[i] << " - " << trainDownTickets[i] << " tickets available" << endl;
+    }
+
+}
+
+
+Task 2
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+int ticket_cost = 25; // declaring and initializing ticket_cost
+
+string trainUpTimes[] = {"09:00", "11:00", "13:00", "15:00"};
+int trainUpTickets[] = {480, 480, 480, 480};
+int trainUpMoney[] = {0, 0, 0, 0};
+
+string trainDownTimes[] = {"10:00", "12:00", "14:00", "16:00"};
+int trainDownTickets[] = {480, 480, 480, 480};
+int trainDownMoney[] = {0, 0, 0, 0};
+
+cout << "--------Welcome to Railway Station-----------" << endl;
+cout << "------Train Schedule-------" << endl;
+
+for (int i = 0; i < 4; ++i) {
+    cout << "Train " << (i + 1) << " (Up): " << trainUpTimes[i] << " - " << trainUpTickets[i] << " tickets available" << endl;
+    cout << "Train " << (i + 1) << " (Down): " << trainDownTimes[i] << " - " << trainDownTickets[i] << " tickets available" << endl;
+}
+
+// Task 2
+string sellingTickets = "yes";
+while (sellingTickets == "yes") {
+    int timeUp;
+    cout << "What time would u like to go up the mountain? 9,11,13,15" << endl;
+    cin >> timeUp;
+    while (timeUp != 9 and timeUp != 11 and timeUp != 13 and timeUp != 15) {
+        cout << "Error, What time would you go up to the mountain? 9,11,13 or 15" << endl;
+        cin >> timeUp;
+    }
+    int indexUp;
+    for (int count = 0; count < 4; count++) {
+        if (timeUp == stoi(trainUpTimes[count].substr(0, 2))) {
+            indexUp = count;
+        }
+    }
+    int timeDown;
+    cout << "What time will you come down? 10,12,14 or 16" << endl;
+    cin >> timeDown;
+    while (timeDown < timeUp or (timeDown != 10 and timeDown != 12 and timeDown != 14 and timeDown != 16)) {
+        cout << "Error,what time will you come down? 10,12,14 or 16" << endl;
+        cin >> timeDown;
+    }
+    int indexDown;
+    for (int count = 0; count < 4; count++) {
+        if (timeDown == stoi(trainDownTimes[count].substr(0, 2))) {
+            indexDown = count;
+        }
+    }
+    int numPassengers; // declaring a variable to store the number of passengers or the group size
+    cout << "How many passengers are you booking for? " << endl; // asking the user for the number of passengers or the group size
+    cin >> numPassengers;
+    int numTickets = numPassengers; // assuming one ticket per passenger
+    if (numTickets <= trainUpTickets[indexUp] and numTickets <= trainDownTickets[indexDown]) { // checking if the number of tickets requested is less than or equal to the number of tickets available for both the up and down trains
+        int tripCost = ticket_cost * numTickets; // calculating the trip cost for one way
+        int totalCost = tripCost * 2; // calculating the total cost for both ways
+        if (numPassengers > 5) { // applying a group discount of 10% if the number of passengers is more than 5
+            totalCost = totalCost * 0.9; // multiplying the total cost by 0.9 to get the discounted price
+            cout << "You are eligible for a group discount of 10%." << endl; // informing the user about the group discount
+        }
+        cout << "Your trip cost for both ways is : " << totalCost << endl; // printing the total cost with a message
+        cout << "Do you want to buy the tickets? yes or no" << endl; // asking the user if they want to buy the tickets
+        cin >> sellingTickets;
+        if (sellingTickets == "yes") { // confirming the purchase and updating the data
+            trainUpTickets[indexUp] -= numTickets; // updating the available tickets for the up train
+            trainDownTickets[indexDown] -= numTickets; // updating the available tickets for the down train
+            trainUpMoney[indexUp] += tripCost; // updating the money earned for the up train
+            trainDownMoney[indexDown] += tripCost; // updating the money earned for the down train
+            cout << "Thank you for your purchase. Enjoy your trip!" << endl; // thanking the user for their purchase
+        }
+    }
+    else { // informing the user if the tickets are not available
+        cout << "Sorry, the tickets are not available for your requested time and number of passengers." << endl;
+        cout << "Do you want to try again? yes or no" << endl; // asking the user if they want to try again
+        cin >> sellingTickets;
+    }
+    cout << "Updated train schedule:" << endl; // printing the updated train schedule
+
+    for (int i = 0; i < 4; ++i) {
+        cout << "Train " << (i + 1) << " (Up): " << trainUpTimes[i] << " - " << trainUpTickets[i] << " tickets available" << endl;
+        cout << "Train " << (i + 1) << " (Down): " << trainDownTimes[i] << " - " << trainDownTickets[i] << " tickets available" << endl;
+    }
+}
+return 0;
+
+
+}
+
+//Task 3
+
+// Task 3 - End of the day
+// Display the number of passengers that traveled on each train journey and the total money taken for each train journey
+cout << "End of the day report:" << endl;
+for (int i = 0; i < 4; ++i) {
+    int passengersUp = 100 - trainUpTickets[i]; // calculate the number of passengers that traveled on the up train
+    int passengersDown = 100 - trainDownTickets[i]; // calculate the number of passengers that traveled on the down train
+
+    cout << "Train " << (i + 1) << " (Up): " << passengersUp << " passengers, " << trainUpMoney[i] << " money" << endl;
+    // display the number of passengers and the money taken for the up train
+
+    cout << "Train " << (i + 1) << " (Down): " << passengersDown << " passengers, " << trainDownMoney[i] << " money" << endl;
+    // display the number of passengers and the money taken for the down train
+}
+
+// Calculate and display the total number of passengers and the total amount of money taken for the day
+int totalPassengers = 0; // initialize a variable to store the total number of passengers
+int totalMoney = 0; // initialize a variable to store the total amount of money
+for (int i = 0; i < 4; ++i) {
+    totalPassengers += (100 - trainUpTickets[i]) + (100 - trainDownTickets[i]); // add the number of passengers for each train journey to the total
+    totalMoney += trainUpMoney[i] + trainDownMoney[i]; // add the money taken for each train journey to the total
+}
+cout << "Total passengers: " << totalPassengers << endl; // display the total number of passengers
+cout << "Total money: " << totalMoney << endl; // display the total amount of money
+
+// Find and display the train journey with the most passengers that day
+int maxPassengers = 0; // initialize a variable to store the maximum number of passengers
+int maxIndex = 0; // initialize a variable to store the index of the train journey with the maximum number of passengers
+string maxDirection = ""; // initialize a variable to store the direction of the train journey with the maximum number of passengers
+for (int i = 0; i < 4; ++i) {
+    int passengersUp = 100 - trainUpTickets[i]; // calculate the number of passengers that traveled on the up train
+    int passengersDown = 100 - trainDownTickets[i]; // calculate the number of passengers that traveled on the down train
+
+    if (passengersUp > maxPassengers) {
+        // check if the number of passengers on the up train is greater than the current maximum
+        maxPassengers = passengersUp; // update the maximum number of passengers
+        maxIndex = i; // update the index of the train journey
+        maxDirection = "Up"; // update the direction of the train journey
+    }
+
+    if (passengersDown > maxPassengers) {
+        // check if the number of passengers on the down train is greater than the current maximum
+        maxPassengers = passengersDown; // update the maximum number of passengers
+        maxIndex = i; // update the index of the train journey
+        maxDirection = "Down"; // update the direction of the train journey
+    }
+}
+
+cout << "The train journey with the most passengers was Train " << (maxIndex + 1) << " (" << maxDirection << "): " << maxPassengers << " passengers" << endl;
+// display the train journey with the most passengers
 
