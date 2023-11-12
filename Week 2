@@ -134,11 +134,11 @@ for (int i = 0; i < 4; ++i) {
     int passengersUp = 100 - trainUpTickets[i]; // calculate the number of passengers that traveled on the up train
     int passengersDown = 100 - trainDownTickets[i]; // calculate the number of passengers that traveled on the down train
 
-    cout << "Train " << (i + 1) << " (Up): " << passengersUp << " passengers, " << trainUpMoney[i] << " money" << endl;
+     cout << "Train " << (i + 1) << " (Up): " << passengersUp << " passengers, "<< " $" << trainUpMoney[i] << endl;
     // display the number of passengers and the money taken for the up train
 
-    cout << "Train " << (i + 1) << " (Down): " << passengersDown << " passengers, " << trainDownMoney[i] << " money" << endl;
-    // display the number of passengers and the money taken for the down train
+    cout << "Train " << (i + 1) << " (Down): " << passengersDown << " passengers, "<< " $" << trainDownMoney[i] << endl;
+   
 }
 
 // Calculate and display the total number of passengers and the total amount of money taken for the day
@@ -146,10 +146,10 @@ int totalPassengers = 0; // initialize a variable to store the total number of p
 int totalMoney = 0; // initialize a variable to store the total amount of money
 for (int i = 0; i < 4; ++i) {
     totalPassengers += (100 - trainUpTickets[i]) + (100 - trainDownTickets[i]); // add the number of passengers for each train journey to the total
-    totalMoney += trainUpMoney[i] + trainDownMoney[i]; // add the money taken for each train journey to the total
+    totalMoney += trainUpMoney[i] + trainDownMoney[i];
 }
 cout << "Total passengers: " << totalPassengers << endl; // display the total number of passengers
-cout << "Total money: " << totalMoney << endl; // display the total amount of money
+cout << "Total money: " << totalMoney << endl; 
 
 // Find and display the train journey with the most passengers that day
 int maxPassengers = 0; // initialize a variable to store the maximum number of passengers
