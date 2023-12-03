@@ -1,1 +1,104 @@
+#include <iostream>
+using namespace std;
+#include <cmath>
+
+// Define a class for hexagon
+class Hexagon {
+private:
+    double side;
+
+public:
+    // Define a constructor that takes the side length as a parameter and assigns it to an attribute
+    Hexagon(double side) : side(side) {}
+
+    // Define a method that calculates and returns the area of the hexagon
+    double calculateArea() const {
+        // Use the formula: area = 1.5 * sqrt(3) * side^2
+        return 1.5 * sqrt(3) * pow(side, 2);
+    }
+
+    // Define a method that calculates and returns the perimeter of the hexagon
+    double calculatePerimeter() const {
+        // Use the formula: perimeter = 6 * side
+        return 6 * side;
+    }
+
+    // Define a method that calculates and returns the sum of all the angles of the hexagon
+    double calculateAngleSum() const {
+        // Use the formula: angle_sum = 6 * a, where a is the measure of one angle of the hexagon, which is 120 degrees
+        return 6 * 120;
+    }
+
+    // Define a method that displays the area, perimeter, and angle sum of the hexagon
+    void display() const {
+        cout << "Area of hexagon is: " << calculateArea() << endl;
+        cout << "Perimeter is: " << calculatePerimeter() << endl;
+        cout << "Sum of angle of hexagon is: " << calculateAngleSum() <<endl;
+    }
+};
+
+// Define a class for square
+class Square {
+private:
+    double side;
+
+public:
+    // Define a constructor that takes the side length as a parameter and assigns it to an attribute
+    Square(double side) : side(side) {}
+
+    // Define a method that calculates and returns the area of the square
+    double calculateArea() const {
+        // Use the formula: area = side^2
+        return pow(side, 2);
+    }
+
+    // Define a method that calculates and returns the perimeter of the square
+    double calculatePerimeter() const {
+        // Use the formula: perimeter = 4 * side
+        return 4 * side;
+    }
+
+    // Define a method that displays the area and perimeter of the square
+    void display() const {
+        cout << "Area of square is: " << calculateArea() << endl;
+        cout << "Perimeter is: " << calculatePerimeter() << endl;
+    }
+};
+
+int main() {
+    char choice;
+
+    // Replace 'X' with the last digit of your CNIC
+    int lastDigit = 4;  // Change this to your actual last digit
+
+    // Create objects of Hexagon and Square classes
+    Hexagon hexagon(lastDigit);
+    Square square(lastDigit + 1);
+
+    // Menu
+    cout << "Press 1 to calculate area, perimeter, and angles of hexagon." << endl;
+    cout << "Press 2 to calculate area and perimeter of square." <<endl;
+    cout << "Press any other key to exit." << std::endl;
+
+    // Get user choice
+    cin >> choice;
+
+    // Perform actions based on user choice
+    switch (choice) {
+        case '1':
+            hexagon.display();
+            break;
+
+        case '2':
+            square.display();
+            break;
+
+        default:
+            // Exit the program
+            std::cout << "Exiting the program." <<endl;
+            break;
+    }
+
+    return 0;
+}
 
